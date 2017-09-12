@@ -1,9 +1,9 @@
 //
 //  YCHead.h
-//  掌声植物
+//  宝山
 //
-//  Created by 尤超 on 16/9/14.
-//  Copyright © 2016年 尤超. All rights reserved.
+//  Created by 尤超 on 17/4/12.
+//  Copyright © 2017年 尤超. All rights reserved.
 //
 
 #ifndef YCHead_h
@@ -12,14 +12,25 @@
 
 #import "SVProgressHUD.h"
 #import "UINavigationBar+Awesome.h"
-#import "NewViewController.h"
 #import <MJRefresh.h>
-#import "AFNetwork.h"
 #import <Masonry.h>
 #import "UIImageView+WebCache.h"
 #import "UIView+Extension.h"
 #import "CreatControls.h"
+#import <AFNetworking.h>
 #import "DBManager.h"
+#import "AFNetwork.h"
+#import <MBProgressHUD.h>
+
+// 自定义
+#import "MJChiBaoZiHeader.h"
+#import "MJChiBaoZiFooter.h"
+#import "MJChiBaoZiFooter2.h"
+#import "MJDIYHeader.h"
+#import "MJDIYAutoFooter.h"
+#import "MJDIYBackFooter.h"
+#import "UIButton+ImageTitleSpacing.h"
+#import "DAYCalendarView.h"
 
 
 #define NOTIFICATION_NAME  @"selectimage"     //选取图片发送通知使用
@@ -101,88 +112,135 @@
 /****************************请求地址*******************************/
 
 //根URL
-#define Main_URL @"http://mcc.shlantian.cn:8080/botany/%@"
+#define Main_URL @"http://123.206.206.45:8082/baoShan/%@"
 
 // ** 登录接口
-#define Login_URL @"app_login"
+#define Login_URL @"app/Login"
 
 // ** 验证码接口
-#define Verification_URL @"hq_yzm?mobile=%@"
+#define Verification_URL @"app/obtainyzm?mobile=%@"
 
 // ** 注册接口
-#define Registered_URL @"app_reg"
+#define Registered_URL @"app/registered"
 
 // ** 忘记密码接口
-#define Forget_URL @"app_zhaohui_pwd"
+#define Forget_URL @"app/forgotPassword"
 
-// ** 首页文章刷新
-#define HOME_URL @"app_article_admin?page=%d&type=2"
+// ** 首页
+#define HOME_URL @"app_ImageLoder?type=1&istype=%d"
 
-// ** 首页搜索文章
-#define Search_Url @"app_article_admin"
+// ** 活动列表
+#define ActiveList_URL @"AppActiveList?state=%d&page=%d"
 
+// ** 修改个人信息
+#define Modify_URL @"upDataMyInformation"
 
+// ** 消息
+#define Message_URL @"myMessage?uid=%@&page=%d"
 
-//// ** 帮助与反馈
-////帮助接口
-//#define help_URL @"app_help_feedback"
+// ** 删除消息
+#define delMessage_URL @"delMessage?uid=%@&id=%@"
 
-//反馈接口
-#define feedback_URL @"app_feedback"
+// ** 我的发布列表
+#define PostList_URL @"mypostlist"
 
+// ** 热门标签
+#define Tag_URL @"post_tag"
 
-//客户协议
-#define del_URL @"app_content_select?type=1"
+// ** 添加发布
+#define AddPost_URL @"addpost"
 
-// ** 修改个人信息接口
-#define Modify_URL @"app_update_userinfo"
+// ** 我的展项列表
+#define EXList_URL @"myExhibition"
 
+// ** 新闻列表
+#define News_URL @"AppNewsList"
 
-// ** 植物圈子的文章，所有的文章接口
-#define All_circle_URL @"app_article_admin?page=%d&type=1"
+// ** 研讨交流列表
+#define PostAll_URL @"postPageList"
 
-// ** 我的收藏接口
-#define Collection_URL @"my_shoucang"
+// ** 语言导览列表
+#define VoiceList_URL @"voice/list"
 
-// ** 我的发布接口
-#define Releas_URL @"my_fabu"
+// ** 展厅分布图
+#define Tu_URL @"myscattergram"
 
+// ** 一键导航
+#define Point_URL @"queryTitle"
+#define DH_URL @"queryTourImg"
 
+// ** 常设展厅
+#define ZXList_URL @"exhibition/list"
+#define ZTList_URL @"exhibition/list/office"
+#define ZTInfo_URL @"exhibition/office/introduce?id=%@"
 
+// ** 临时展厅
+#define LSList_URL @"exhibition/list"
 
-// ** 发布圈子
-#define AddArticle_URL @"app_addArticle"
+// ** 票务预约
+#define Ticket_URL @"Addtickets"
+#define TicketInfo_URL @"ticketReservation_info"
 
+// ** 票列表
+#define TicketList_URL @"ticketReservation"
+#define delTicket_URL @"delticketReservation?id=%@"
 
-// ** 文章详情页看的H5接口      传入文章的唯一ID  和自己的USER id
-#define HTML_HOME_INFO @"http://mcc.shlantian.cn:8080/botany/view/webxv/articleios.html?fk_id=%@"
+// ** 活动预约列表
+#define activitList_URL @"ActivitiesappointmentList"
+#define delActivit_URL @"delActivitiesappointment?id=%@"
 
+// ** 设备统计
+#define SBList_URL @"exhibition_Statistics"
+#define SB2List_URL @"exhibition_detailed"
+#define SBinfo_URL @"app_equipment_info"
 
-// ** 布水圈子详情页面的H5接口   传入文章的唯一ID  和自己的USER id
-#define HTML5_INFO @"http://mcc.shlantian.cn:8080/botany/view/webxv/cricle_detailsmyios.html?fk_id=%@&fk_uid=%@"
+// ** 票务统计
+#define Tcount_URL @"myticketCount"
 
-// ** 收藏文章接口
-#define Collection_the_url @"app_addData"
+// ** 展项统计
+#define ZXcount_URL @"app_equipment_data"
 
+// ** 人数统计
+#define Pcount_URL @"app_number_data"
 
-// ** 系统通知
-#define NOTICE @"app_tz_xitong"
+// ** 简介详情(开馆时间)
+#define Htime1_URL @"view/ios/time1.html"
 
+// ** 新闻资讯
+#define Hnews_URL @"view/ios/news.html?id=%@&uid=%@"
 
-// ** 硬件开关控制系统
-#define OPEN_URL @"view_kaiguan"
+// ** 研讨交流
+#define Hcommunication_URL @"view/ios/communication.html?id=%@&uid=%@"
 
-// ** 实时数据接口
-#define now_data_URL @"app_queryshishi?uid=%@"
+// ** 活动回顾详情
+#define Hactivity_URL @"view/ios/activity.html?id=%@"
 
-// ** 添加布水设备接口
-#define AddNO_URL @"view_add"
+// ** 活动报名详情
+#define HactivityB_URL @"view/ios/activity_name.html?id=%@"
 
+// ** 活动预告_调查详情
+#define Hevent_URL @"view/ios/event.html?id=%@"
 
+// ** 评选（4-22）方法2
+#define Hselection_URL @"view/ios/selection.html?id=%@"
 
+// ** 展厅信息正在展览详情
+#define Hdisplayed_URL @"view/ios/displayed.html?id=%@"
 
+// ** 收藏列表
+#define CollectionList_URL @"CollectionList?uid=%@&type=%@&page=%d"
 
+// ** 搜索
+#define SearchList_URL @"search/list"
 
+// ** 收藏
+#define AddCollection_URL @"AddCollection"
+
+// ** 报名
+#define AppActiveBm_URL @"AppActiveBm"
+
+// ** 语音浏览量
+#define Addread_URL @"voice/addreadnumber_voice?id=%@"
 
 
 #endif /* YCHead_h */

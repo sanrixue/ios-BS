@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class MessageModel;
+
+static NSString *messageIndentifier = @"messageCell";
+
 @interface MessageCell : UITableViewCell
+
+@property (nonatomic, strong) MessageModel *MessageModel;
+
+@property (nonatomic, strong) UILabel *title;
+@property (nonatomic, strong) UILabel *context;
+@property (nonatomic, strong) UILabel *time;
 
 @end

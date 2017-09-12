@@ -7,6 +7,14 @@
 //
 
 #import "AppDelegate.h"
+#import "YCHead.h"
+#import "MainTabBarController.h"
+#import "MainNavigationController.h"
+#import "YCNewFeatureController.h"
+
+#import "DataController.h"
+
+
 
 @interface AppDelegate ()
 
@@ -17,9 +25,35 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    return YES;
-}
+    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+  
+    
+    //CFBundleVersion内部版本号
+    NSString *key = @"CFBundleVersion";
+    
+    // 上一次的使用版本（存储在沙盒中的版本号）
+    NSString *lastVersion = [[NSUserDefaults standardUserDefaults] objectForKey:key];
+    // 当前软件的版本号（从Info.plist中获得）
+    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[key];
+    
+    NSLog(@"%@~~~~~~~%@",lastVersion,currentVersion);
+    
+    if ([currentVersion isEqualToString:lastVersion]) {
+        self.window.rootViewController = [[MainTabBarController alloc] init];
+        
+    } else {
+        self.window.rootViewController = [[YCNewFeatureController alloc] init];
+        // 将当前的版本号存进沙盒
+        [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:key];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
 
+    [self.window makeKeyAndVisible];
+
+    return YES;
+    
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

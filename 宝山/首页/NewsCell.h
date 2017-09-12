@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class NewsModel;
+
+static NSString *newsIndentifier = @"newsCell";
+
 @interface NewsCell : UITableViewCell
 
+@property (nonatomic, strong) NewsModel *newsModel;
+
+@property (nonatomic, strong) UIImageView *icon;
+@property (nonatomic, strong) UILabel *title;
+@property (nonatomic, strong) UILabel *context;
+@property (nonatomic, strong) UILabel *time;
 @end

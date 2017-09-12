@@ -145,9 +145,10 @@
 
             NSInteger y = (NSInteger) (_chartCavanHeight + _chartMarginTop - index * yStepHeight);
 
-            PNChartLabel *label = [[PNChartLabel alloc] initWithFrame:CGRectMake(0.0, y, (NSInteger) _chartMarginLeft * 0.9, (NSInteger) _yLabelHeight)];
+            PNChartLabel *label = [[PNChartLabel alloc] initWithFrame:CGRectMake(-10, y-20, (NSInteger) _chartMarginLeft * 1.5, (NSInteger) _yLabelHeight)];
             [label setTextAlignment:NSTextAlignmentRight];
             label.text = labelText;
+            label.textColor = [UIColor grayColor];
             [self setCustomStyleForYLabel:label];
             [self addSubview:label];
             [_yChartLabels addObject:label];
@@ -203,6 +204,7 @@
             PNChartLabel *label = [[PNChartLabel alloc] initWithFrame:CGRectMake(x, y, (NSInteger) _xLabelWidth, (NSInteger) _chartMarginBottom)];
             [label setTextAlignment:NSTextAlignmentCenter];
             label.text = labelText;
+            label.textColor = [UIColor grayColor];
             [self setCustomStyleForXLabel:label];
             [self addSubview:label];
             [_xChartLabels addObject:label];

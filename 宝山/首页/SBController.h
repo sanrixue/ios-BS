@@ -10,4 +10,6 @@
 
 @interface SBController : UIViewController
 
+@property (nonatomic, strong) NSString *ID;
+
 @end

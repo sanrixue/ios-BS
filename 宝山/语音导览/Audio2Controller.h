@@ -10,4 +10,6 @@
 
 @interface Audio2Controller : UIViewController
 
+@property (nonatomic, strong) NSString *ID;
+
 @end

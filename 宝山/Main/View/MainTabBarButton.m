@@ -1,13 +1,13 @@
 //
 //  MainTabBarButton.m
-//  cmbfaeApp
+//  宝山
 //
-//  Created by 余钦 on 16/4/7.
-//  Copyright © 2016年 cmbfae Co.,Ltd. All rights reserved.
+//  Created by 尤超 on 17/4/12.
+//  Copyright © 2017年 尤超. All rights reserved.
 //
 
 #import "MainTabBarButton.h"
-
+#import "YCHead.h"
 
 //image ratio
 #define TabBarButtonImageRatio 0.6
@@ -23,7 +23,8 @@
         self.imageView.contentMode = UIViewContentModeBottom;
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
         self.titleLabel.font = [UIFont systemFontOfSize:12];
-        [self setTitleColor:[UIColor colorWithRed:205/255.0f green:89/255.0f blue:75/255.0f alpha:1.0] forState:UIControlStateSelected];
+        //字体颜色
+        [self setTitleColor:COLOR(1, 125, 23, 1) forState:UIControlStateSelected];
 
         [self setTitleColor:[UIColor colorWithRed:117/255.0f green:117/255.0f blue:117/255.0f alpha:1.0] forState:UIControlStateNormal];
 

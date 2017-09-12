@@ -12,7 +12,7 @@
 #import "MusicModel.h"
 #import "UIImage+ImageEffects.h" // 模糊效果
 #import "RotatingView.h"   // 旋转View
-
+#import "YCHead.h"
 /**
  *  注：为适配中间旋转图片大小
  *      topHeight: 上部分控件高度

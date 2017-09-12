@@ -1,3 +1,4 @@
+
 //
 //  ZXcountModel.m
 //  宝山
@@ -9,5 +10,25 @@
 #import "ZXcountModel.h"
 
 @implementation ZXcountModel
+
+- (instancetype)initWithDict:(NSDictionary *)dic {
+    if (self = [super init]) {
+        self.ename = [dic valueForKey:@"ename"];
+        self.title = [dic valueForKey:@"title"];
+        self.count = [dic valueForKey:@"count"];
+        self.total_time = [dic valueForKey:@"total_time"];
+    }
+    return self;
+    
+}
+
++ (instancetype)zxWithDict:(NSDictionary *)dic {
+    return [[self alloc]initWithDict:dic];
+}
+
+
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key{
+    NSLog(@"%@",key);
+}
 
 @end

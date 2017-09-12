@@ -36,12 +36,12 @@
 /**
  *  回调统计选中tag
  */
-@property(nonatomic,copy)void (^didselectItemBlock)(NSArray*arr);
+@property(nonatomic,copy)void (^didselectItemBlock)(NSMutableArray*arr);
 @property(nonatomic) BOOL canTouch;
 /**
  *  标签文本赋值
  */
--(void)setTagWithTagArray:(NSArray*)arr;
+-(void)setTagWithTagArray:(NSMutableArray*)arr;
 
 
 @end

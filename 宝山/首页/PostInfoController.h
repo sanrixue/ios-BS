@@ -10,4 +10,6 @@
 
 @interface PostInfoController : UIViewController
 
+@property (nonatomic, strong) NSString *ID;
+
 @end

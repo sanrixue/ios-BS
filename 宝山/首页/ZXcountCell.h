@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class ZXcountModel;
+
+static NSString *zxcountIndentifier = @"zxcountCell";
+
 @interface ZXcountCell : UITableViewCell
+
+@property (nonatomic, strong) ZXcountModel *zxcountModel;
+
+@property (nonatomic, strong) UILabel *title;
+@property (nonatomic, strong) UILabel *count;
+@property (nonatomic, strong) UILabel *time;
 
 @end

@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ZTCell : UITableViewCell
+@class ZTModel;
+
+static NSString *ztIndentifier = @"ztCell";
+
+@interface ZTCell : UICollectionViewCell
+
+@property (nonatomic, strong) ZTModel *ztModel;
+
+@property (nonatomic, strong) UIImageView *icon;
+@property (nonatomic, strong) UILabel *title;
 
 @end
+

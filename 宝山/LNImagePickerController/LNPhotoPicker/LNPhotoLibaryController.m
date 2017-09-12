@@ -15,7 +15,7 @@
 #import "LNPhotoCell.h"
 #import "LNPhotoAsset.h"
 #import "LNPhotoView.h"
-
+#import "YCHead.h"
 #import "PhotoModle.h"
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width

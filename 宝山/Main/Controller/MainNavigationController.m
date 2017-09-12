@@ -1,12 +1,13 @@
 //
 //  MainNavigationController.m
-//  模仿简书自定义Tabbar（纯代码）
+//  宝山
 //
-//  Created by 余钦 on 16/5/30.
-//  Copyright © 2016年 yuqin. All rights reserved.
+//  Created by 尤超 on 17/4/12.
+//  Copyright © 2017年 尤超. All rights reserved.
 //
 
 #import "MainNavigationController.h"
+#import "YCHead.h"
 
 @interface MainNavigationController ()<UINavigationControllerDelegate>
 
@@ -14,9 +15,36 @@
 
 @implementation MainNavigationController
 - (void)viewDidLoad{
+    
     [super viewDidLoad];
+    
     self.delegate = self;
+    
+    [self.navigationBar lt_setBackgroundColor:[UIColor blackColor]];
+    [self.navigationBar lt_setTranslationY:0];
+    [self.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20],NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    self.navigationBar.barStyle = UIBaselineAdjustmentNone;
+
+    
 }
+
+- (BOOL)shouldAutorotate{
+    return [self.visibleViewController shouldAutorotate];
+    
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
+    return [self.visibleViewController preferredInterfaceOrientationForPresentation];
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    if (![self.visibleViewController isKindOfClass:[UIAlertController class]]) {
+        return [self.visibleViewController supportedInterfaceOrientations];
+    }else{
+        return UIInterfaceOrientationMaskPortrait;
+    }
+}
+
 
  //这里可以封装成一个分类
 - (UIBarButtonItem *)barButtonItemWithImage:(NSString *)imageName highImage:(NSString *)highImageName target:(id)target action:(SEL)action
@@ -33,12 +61,14 @@
     return  [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
+
+//设置返回按钮
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
     
     if (self.viewControllers.count >= 1) {
         viewController.hidesBottomBarWhenPushed = YES;
     
-        UIBarButtonItem *popToPreButton = [self barButtonItemWithImage:@"SVWebViewControllerBack" highImage:nil target:self action:@selector(popToPre)];
+        UIBarButtonItem *popToPreButton = [self barButtonItemWithImage:@"fanhui" highImage:nil target:self action:@selector(popToPre)];
         viewController.navigationItem.leftBarButtonItem = popToPreButton;
     }
     [super pushViewController:viewController animated:animated];

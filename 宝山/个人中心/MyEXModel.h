@@ -10,4 +10,13 @@
 
 @interface MyEXModel : NSObject
 
+@property (nonatomic, copy) NSString *icon;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *time;
+
+
+- (instancetype)initWithDict:(NSDictionary *)dic;
+
++ (instancetype)myEXWithDict:(NSDictionary *)dic;
+
 @end

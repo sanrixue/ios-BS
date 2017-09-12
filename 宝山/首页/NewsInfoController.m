@@ -7,8 +7,11 @@
 //
 
 #import "NewsInfoController.h"
+#import "YCHead.h"
 
-@interface NewsInfoController ()
+@interface NewsInfoController ()<UIWebViewDelegate>
+
+@property (nonatomic, strong) UIWebView *web;
 
 @end
 
@@ -17,6 +20,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationItem.title = @"新闻详情";
+    
+    self.web = [[UIWebView alloc] init];
+    self.web.frame = self.view.frame;
+    self.web.delegate = self;
+    [self.view addSubview:self.web];
+    
+    DBManager *model = [[DBManager sharedManager] selectOneModel];
+    NSMutableArray *mutArray = [NSMutableArray array];
+    [mutArray addObject:model];
+    UserModel *userModel = mutArray[0];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:Main_URL,[NSString stringWithFormat:Hnews_URL,self.ID,userModel.user_id]]];
+    
+    NSLog(@"%@",url);
+    
+    [self.web loadRequest:[NSURLRequest requestWithURL:url]];
+    
 }
 
 - (void)didReceiveMemoryWarning {

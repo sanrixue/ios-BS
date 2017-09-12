@@ -1,3 +1,4 @@
+
 //
 //  HomeModel.m
 //  宝山
@@ -9,5 +10,22 @@
 #import "HomeModel.h"
 
 @implementation HomeModel
+
+- (instancetype)initWithDict:(NSDictionary *)dic {
+    if (self = [super init]) {
+        self.name = [dic valueForKey:@"title"];
+        self.image = [dic valueForKey:@"banner"];
+
+    }
+    return self;
+}
+
++ (instancetype)homeWithDict:(NSDictionary *)dict {
+    return [[self alloc]initWithDict:dict];
+}
+
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key{
+    NSLog(@"%@",key);
+}
 
 @end

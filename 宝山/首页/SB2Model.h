@@ -10,4 +10,13 @@
 
 @interface SB2Model : NSObject
 
+@property (nonatomic, copy) NSString *icon;       //图片
+@property (nonatomic, copy) NSString *title;      //标题
+@property (nonatomic, copy) NSString *ID;
+
+
+- (instancetype)initWithDict:(NSDictionary *)dic;
+
++ (instancetype)sb2WithDict:(NSDictionary *)dic;
+
 @end

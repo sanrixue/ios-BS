@@ -10,4 +10,6 @@
 
 @interface ApplyController : UIViewController
 
+@property (nonatomic, strong) NSString *ID;
+
 @end

@@ -10,4 +10,14 @@
 
 @interface PaModel : NSObject
 
+@property (nonatomic, copy) NSString *icon;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *endTime;
+@property (nonatomic, copy) NSString *startTime;
+@property (nonatomic, copy) NSString *ID;
+
+- (instancetype)initWithDict:(NSDictionary *)dic;
+
++ (instancetype)paWithDict:(NSDictionary *)dic;
+
 @end

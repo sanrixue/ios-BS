@@ -10,4 +10,6 @@
 
 @interface OnceController : UIViewController
 
+@property (nonatomic, strong) NSString *uid;
+
 @end

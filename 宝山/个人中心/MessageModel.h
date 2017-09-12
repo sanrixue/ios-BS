@@ -10,4 +10,13 @@
 
 @interface MessageModel : NSObject
 
+@property (nonatomic, copy) NSString *ID;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *time;
+@property (nonatomic, copy) NSString *context;
+
+- (instancetype)initWithDict:(NSDictionary *)dic;
+
++ (instancetype)messageWithDict:(NSDictionary *)dic;
+
 @end

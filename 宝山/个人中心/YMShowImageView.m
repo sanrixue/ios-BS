@@ -7,6 +7,7 @@
 //
 
 #import "YMShowImageView.h"
+#import "YCHead.h"
 
 @implementation YMShowImageView{
 
@@ -71,8 +72,9 @@
         imageScrollView.minimumZoomScale = 1;
         
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.bounds];
-        UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"%@",[appendArray objectAtIndex:i]]];
-        imageView.image = img;
+       
+        [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:Main_URL,[NSString stringWithFormat:@"%@",[appendArray objectAtIndex:i]]]]];
+        
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         [imageScrollView addSubview:imageView];
         [_scrollView addSubview:imageScrollView];
@@ -128,7 +130,7 @@
     zoomRect.size.width = scrollV.frame.size.width  / newscale;
     zoomRect.origin.x = center.x - (zoomRect.size.width  / 2.0);
     zoomRect.origin.y = center.y - (zoomRect.size.height / 2.0);
-   // NSLog(@" === %f",zoomRect.origin.x);
+  
     return zoomRect;
 
 }
@@ -170,7 +172,7 @@
         scollV_pre.zoomScale = 1.0;
     }
     
-   // NSLog(@"page == %d",page);
+   
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView{

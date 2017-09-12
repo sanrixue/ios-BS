@@ -1,13 +1,15 @@
 //
 //  MainTabBar.m
-//  模仿简书自定义Tabbar（纯代码）
+//  宝山
 //
-//  Created by 余钦 on 16/5/30.
-//  Copyright © 2016年 yuqin. All rights reserved.
+//  Created by 尤超 on 17/4/12.
+//  Copyright © 2017年 尤超. All rights reserved.
 //
 
 #import "MainTabBar.h"
 #import "MainTabBarButton.h"
+#import "YCHead.h"
+#import "TypeModel.h"
 
 @interface MainTabBar ()
 @property(nonatomic, strong)NSMutableArray *tabbarBtnArray;
@@ -23,9 +25,11 @@
     return  _tabbarBtnArray;
 }
 
+//设置tabbar颜色
 - (instancetype)init{
     if (self = [super init]) {
         self.backgroundColor = [UIColor whiteColor];
+        
         [self SetupWriteButton];
     }
     
@@ -35,16 +39,17 @@
 - (void)SetupWriteButton{
     UIButton *writeButton = [UIButton new];
     writeButton.adjustsImageWhenHighlighted = NO;
-    [writeButton setBackgroundImage:[UIImage imageNamed:@"button_write~iphone"] forState:UIControlStateNormal];
+    [writeButton setBackgroundImage:[UIImage imageNamed:@"一键"] forState:UIControlStateNormal];
     [writeButton addTarget:self action:@selector(ClickWriteButton) forControlEvents:UIControlEventTouchUpInside];
-    writeButton.bounds = CGRectMake(0, 0, writeButton.currentBackgroundImage.size.width, writeButton.currentBackgroundImage.size.height);
+  //writeButton.bounds = CGRectMake(0, 0, writeButton.currentBackgroundImage.size.width, writeButton.currentBackgroundImage.size.height);
+    writeButton.bounds = CGRectMake(0, 0, 50, 50);
     [self addSubview:writeButton];
     _writeButton = writeButton;
 }
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    self.writeButton.center = CGPointMake(self.frame.size.width*0.5, self.frame.size.height*0.5);
+    self.writeButton.center = CGPointMake(self.frame.size.width*0.5, self.frame.size.height*0.5-12);
     
     CGFloat btnY = 0;
     CGFloat btnW = self.frame.size.width/(self.subviews.count);
@@ -68,9 +73,20 @@
     [self addSubview:tabBarBtn];
     [self.tabbarBtnArray addObject:tabBarBtn];
     
+    
     //default selected first one
-    if (self.tabbarBtnArray.count == 1) {
-        [self ClickTabBarButton:tabBarBtn];
+    
+    TypeModel *model = [TypeModel shareModel];
+    
+    if ([model.type isEqualToString:@"4"]) {
+        if (self.tabbarBtnArray.count == 4) {
+            [self ClickTabBarButton:tabBarBtn];
+        }
+    } else {
+    
+        if (self.tabbarBtnArray.count == 1) {
+            [self ClickTabBarButton:tabBarBtn];
+        }
     }
 }
 

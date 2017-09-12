@@ -75,6 +75,23 @@
     button.layer.borderColor = [UIColor lightGrayColor].CGColor;
 }
 
+
+- (void)button:(UIButton *)button Title:(NSString *)title Frame:(CGRect)frame TitleColor:(UIColor *)color Selector:(SEL)selector BackgroundColor:(UIColor *)color2 Image:(NSString *)image SelectImage:(NSString *)Simage  BorderColor:(UIColor *) color3{
+    button.frame = frame;
+    [button setTitle:title forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:10];
+    [button setTitleColor:color forState:UIControlStateNormal];
+    [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+    [button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+    [button setBackgroundImage:[UIImage imageNamed:image] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:Simage] forState:UIControlStateSelected];
+    button.backgroundColor = [color2 colorWithAlphaComponent:0.6];
+    button.layer.masksToBounds =YES;
+    button.layer.cornerRadius = 5;
+    button.layer.borderWidth = 1;
+    button.layer.borderColor = color3.CGColor;
+}
+
 - (void)button:(UIButton *)button Frame:(CGRect)frame Selector:(SEL)selector {
     button.frame = frame;
     button.backgroundColor = [UIColor clearColor];
@@ -95,6 +112,17 @@
     label.font = [UIFont systemFontOfSize:number];
     label.textAlignment = NSTextAlignmentCenter;
     label.backgroundColor = [UIColor clearColor];
+
+
+}
+
+- (void)label:(UILabel *)label Font:(UIFont *)font Name:(NSString *)name andFrame:(CGRect)frame {
+    label.frame = frame;
+    label.backgroundColor = [UIColor clearColor];
+    label.textColor = [UIColor grayColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = font;
+    [label setText:[NSString stringWithFormat:@"%@",name]];
 
 
 }

@@ -1,35 +1,44 @@
 //
 //  MainTabBarController.m
-//  模仿简书自定义Tabbar（纯代码）
+//  宝山
 //
-//  Created by 余钦 on 16/5/30.
-//  Copyright © 2016年 yuqin. All rights reserved.
+//  Created by 尤超 on 17/4/12.
+//  Copyright © 2017年 尤超. All rights reserved.
 //
 
 #import "MainTabBarController.h"
-#import "HomeViewController.h"
-#import "MeViewController.h"
-#import "NotificationViewController.h"
-#import "SubscriptionViewController.h"
-#import "WriteViewController.h"
 #import "MainNavigationController.h"
 #import "MainTabBar.h"
+#import "HomeController.h"
+#import "TicketController.h"
+#import "AudioGuideController.h"
+#import "PersonalController.h"
+
+#import "YCHead.h"
+#import "InMapController.h"
 
 
 @interface MainTabBarController ()<MainTabBarDelegate>
+
 @property(nonatomic, weak)MainTabBar *mainTabBar;
-@property(nonatomic, strong)HomeViewController *homeVc;
-@property(nonatomic, strong)SubscriptionViewController *subscriptionVc;
-@property(nonatomic, strong)NotificationViewController *notificationVc;
-@property(nonatomic, strong)MeViewController *meVc;
+@property(nonatomic, strong)HomeController *homeVc;
+@property(nonatomic, strong)TicketController *tickerVc;
+@property(nonatomic, strong)AudioGuideController *audioGuideVc;
+@property(nonatomic, strong)PersonalController *personalVc;
+
 @end
 
 @implementation MainTabBarController
 - (void)viewDidLoad{
     [super viewDidLoad];
     
+  
+    
     [self SetupMainTabBar];
     [self SetupAllControllers];
+   
+#warning eeeee
+//    self.selectedIndex = 1;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -51,23 +60,23 @@
 }
 
 - (void)SetupAllControllers{
-    NSArray *titles = @[@"发现", @"关注", @"消息", @"我的"];
-    NSArray *images = @[@"icon_tabbar_home~iphone", @"icon_tabbar_subscription~iphone", @"icon_tabbar_notification~iphone", @"icon_tabbar_me~iphone"];
-    NSArray *selectedImages = @[@"icon_tabbar_home_active~iphone", @"icon_tabbar_subscription_active~iphone", @"icon_tabbar_notification_active~iphone", @"icon_tabbar_me_active~iphone"];
+    NSArray *titles = @[@"首页", @"票务预约", @"语音导览", @"个人中心"];
+    NSArray *images = @[@"home1", @"home2", @"home3", @"home4"];
+    NSArray *selectedImages = @[@"home1S", @"home2S", @"home3S", @"home4S"];
     
-    HomeViewController * homeVc = [[HomeViewController alloc] init];
+    HomeController * homeVc = [[HomeController alloc] init];
     self.homeVc = homeVc;
     
-    SubscriptionViewController * subscriptionVc = [[SubscriptionViewController alloc] init];
-    self.subscriptionVc = subscriptionVc;
+    TicketController * tickerVc = [[TicketController alloc] init];
+    self.tickerVc = tickerVc;
     
-    NotificationViewController * notificationVc = [[NotificationViewController alloc] init];
-    self.notificationVc = notificationVc;
+    AudioGuideController * audioGuideVc = [[AudioGuideController alloc] init];
+    self.audioGuideVc = audioGuideVc;
     
-    MeViewController * meVc = [[MeViewController alloc] init];
-    self.meVc = meVc;
+    PersonalController * personalVc = [[PersonalController alloc] init];
+    self.personalVc = personalVc;
     
-    NSArray *viewControllers = @[homeVc, subscriptionVc, notificationVc, meVc];
+    NSArray *viewControllers = @[homeVc, tickerVc, audioGuideVc, personalVc];
     
     for (int i = 0; i < viewControllers.count; i++) {
         UIViewController *childVc = viewControllers[i];
@@ -91,10 +100,15 @@
     self.selectedIndex = toBtnTag;
 }
 
+#warning 中间
 - (void)tabBarClickWriteButton:(MainTabBar *)tabBar{
-    WriteViewController *writeVc = [[WriteViewController alloc] init];
-    MainNavigationController *nav = [[MainNavigationController alloc] initWithRootViewController:writeVc];
+   
+    InMapController *VC = [[InMapController alloc] init];
+    
+    MainNavigationController *nav = [[MainNavigationController alloc] initWithRootViewController:VC];
     
     [self presentViewController:nav animated:YES completion:nil];
+    
 }
+
 @end

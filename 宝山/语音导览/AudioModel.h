@@ -10,4 +10,14 @@
 
 @interface AudioModel : NSObject
 
+@property (nonatomic, copy) NSString *ID;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *icon;
+@property (nonatomic, copy) NSString *look;
+@property (nonatomic, copy) NSString *like;
+
+- (instancetype)initWithDict:(NSDictionary *)dic;
+
++ (instancetype)audioWithDict:(NSDictionary *)dic;
+
 @end

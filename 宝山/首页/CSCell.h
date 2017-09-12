@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class CSModel;
+
+static NSString *csIndentifier = @"csCell";
+
 @interface CSCell : UITableViewCell
 
+@property (nonatomic, strong) CSModel *csModel;
+
+@property (nonatomic, strong) UIImageView *icon;
+@property (nonatomic, strong) UILabel *title;
+
 @end
+

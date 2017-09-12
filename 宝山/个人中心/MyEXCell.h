@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class MyEXModel;
+
+static NSString *myEXIndentifier = @"myEXCell";
+
 @interface MyEXCell : UITableViewCell
+
+@property (nonatomic, strong) MyEXModel *myEXModel;
+
+@property (nonatomic, strong) UIImageView *icon;
+@property (nonatomic, strong) UILabel *title;
+@property (nonatomic, strong) UILabel *time;
+
 
 @end

@@ -10,4 +10,6 @@
 
 @interface CollectionInfoController : UIViewController
 
+@property (nonatomic, strong) NSString *type;
+
 @end

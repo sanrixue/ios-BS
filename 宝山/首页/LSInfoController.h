@@ -10,4 +10,6 @@
 
 @interface LSInfoController : UIViewController
 
+@property (nonatomic, strong) NSString *ID;
+
 @end

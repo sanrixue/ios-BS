@@ -10,4 +10,14 @@
 
 @interface ZXcountModel : NSObject
 
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *ename;
+@property (nonatomic, copy) NSString *count;
+@property (nonatomic, copy) NSString *total_time;
+
+
+- (instancetype)initWithDict:(NSDictionary *)dic;
+
++ (instancetype)zxWithDict:(NSDictionary *)dic;
+
 @end

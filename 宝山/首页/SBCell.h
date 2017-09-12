@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class SBModel;
+
+static NSString *sbIndentifier = @"sbCell";
+
 @interface SBCell : UICollectionViewCell
+
+@property (nonatomic, strong) SBModel *sbModel;
+
+@property (nonatomic, strong) UIImageView *icon;
+@property (nonatomic, strong) UILabel *title;
 
 @end

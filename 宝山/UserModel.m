@@ -1,9 +1,9 @@
 //
 //  UserModel.m
-//  GPC
+//  宝山
 //
-//  Created by 董立峥 on 16/8/26.
-//  Copyright © 2016年 董立峥. All rights reserved.
+//  Created by 尤超 on 17/4/20.
+//  Copyright © 2017年 尤超. All rights reserved.
 //
 
 #import "UserModel.h"
@@ -11,19 +11,16 @@
 @implementation UserModel
 
 - (instancetype)initWithDict:(NSDictionary *)dic {
-    
     if (self = [super init]) {
-        
         self.user_id = [dic valueForKey:@"id"];
-        self.user_name = [dic valueForKey:@"name"];
+        self.user_name = [dic valueForKey:@"user_name"];
+        self.user_loginName = [dic valueForKey:@"login_name"];
         self.user_logo = [dic valueForKey:@"logo"];
         self.user_phone = [dic valueForKey:@"phone"];
-        self.user_score = [dic valueForKey:@"score"];
-        self.user_wallet = [dic valueForKey:@"wallet"];
+        self.user_sex = [dic valueForKey:@"sex"];
         self.user_type = [dic valueForKey:@"type"];
-        self.user_idCard = [dic valueForKey:@"idCard"];
-        self.user_status = [dic valueForKey:@"status"];
-        self.user_deposit = [dic valueForKey:@"deposit"];
+        self.user_QRcode = [dic valueForKey:@"qr_code"];
+        
         
     }
     return self;

@@ -7,8 +7,11 @@
 //
 
 #import "JJController.h"
+#import "YCHead.h"
 
-@interface JJController ()
+@interface JJController ()<UIWebViewDelegate>
+
+@property (nonatomic, strong) UIWebView *web;
 
 @end
 
@@ -17,6 +20,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationItem.title = @"展馆简介";
+
+    self.web = [[UIWebView alloc] init];
+    self.web.frame = self.view.frame;
+    self.web.delegate = self;
+    [self.view addSubview:self.web];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:Main_URL,Htime1_URL]];
+    [self.web loadRequest:[NSURLRequest requestWithURL:url]];
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -1,3 +1,4 @@
+
 //
 //  PaModel.m
 //  宝山
@@ -9,5 +10,26 @@
 #import "PaModel.h"
 
 @implementation PaModel
+
+- (instancetype)initWithDict:(NSDictionary *)dic {
+    if (self = [super init]) {
+        self.icon = [dic valueForKey:@"logo"];
+        self.title = [dic valueForKey:@"title"];
+        self.endTime = [dic valueForKey:@"end_time"];
+        self.startTime = [dic valueForKey:@"start_time"];
+        self.ID = [dic valueForKey:@"id"];
+    }
+    return self;
+    
+}
+
++ (instancetype)paWithDict:(NSDictionary *)dic {
+    return [[self alloc]initWithDict:dic];
+}
+
+
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key{
+    NSLog(@"%@",key);
+}
 
 @end

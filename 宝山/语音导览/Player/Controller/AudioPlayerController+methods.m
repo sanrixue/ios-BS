@@ -30,7 +30,7 @@
 - (void)setRotatingViewFrame{
    
   
-    self.rotatingView.frame = CGRectMake(0, 64, KScreenWidth, 180);
+    self.rotatingView.frame = CGRectMake(0, 64, KSCREENWIDTH, 200);
     
     [self.rotatingView setRotatingViewLayoutWithFrame:self.rotatingView.frame];
 }
@@ -44,13 +44,7 @@
     
     self.underImageView.image = [UIImage imageNamed:@"音乐_播放器_默认模糊背景"];
     
-//    [self.rotatingView.imageView sd_setImageWithURL:[NSURL URLWithString:model.logo] placeholderImage:[UIImage imageNamed:@"音乐_播放器_默认唱片头像"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//        if (image) {
-//           
-//        }
-//    }];
-    
-    [self.rotatingView.imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://123.206.206.45:8082/baoShan/%@",model.logo]]];
+    [self.rotatingView.imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:Main_URL,model.logo]]];
     
 }
 

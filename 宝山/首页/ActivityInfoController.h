@@ -10,4 +10,8 @@
 
 @interface ActivityInfoController : UIViewController
 
+@property (nonatomic, strong) NSString *ID;
+@property (nonatomic, strong) NSString *type;
+@property (nonatomic, strong) NSString *state;
+
 @end

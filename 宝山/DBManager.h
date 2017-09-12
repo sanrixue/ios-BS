@@ -1,9 +1,9 @@
 //
 //  DBManager.h
-//  BaMaiYL
+//  宝山
 //
-//  Created by Super on 16/5/6.
-//  Copyright © 2016年 季晓侠. All rights reserved.
+//  Created by 尤超 on 17/4/20.
+//  Copyright © 2017年 尤超. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -37,7 +37,6 @@
 
 
 //修改
-- (void)upadteUserModelModelName:(NSString *)modelName ModelPassword:(NSString *)modelPassword FromModelId:(NSString *)modelId;
-
+- (void)upadteUserModelModelName:(NSString *)modelName ModelModelSex:(NSString *)modelSex FromModelId:(NSString *)modelId;
 
 @end

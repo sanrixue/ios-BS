@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class HomeModel;
+
+static NSString *homeIndentifier = @"homeCell";
+
 @interface HomeCell : UITableViewCell
+
+@property (nonatomic, strong) HomeModel *homeModel;
+
+@property (nonatomic, strong) UILabel *name;
+@property (nonatomic, strong) UIImageView *image;
+
 
 @end

@@ -75,11 +75,13 @@ static NSUInteger currentImage = 1;//记录中间图片的下标,开始总是为
 }
 
 
-
 #pragma mark - 设置广告所使用的图片(名字)
 - (void)setImageNameArray:(NSMutableArray *)imageNameArray
 {
     _imageNameArray = imageNameArray;
+    
+    
+   //图片数组0123，第一张图是1，2，3，0
     
     [_leftImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:Main_URL,_imageNameArray[0][@"banner"]]]];
     
@@ -87,6 +89,7 @@ static NSUInteger currentImage = 1;//记录中间图片的下标,开始总是为
     
     [_rightImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:Main_URL,_imageNameArray[2][@"banner"]]]];
     
+ 
 }
 
 #pragma mark - 设置每个对应广告对应的广告语
@@ -149,16 +152,16 @@ static NSUInteger currentImage = 1;//记录中间图片的下标,开始总是为
     
     if (PageControlShowStyle == UIPageControlShowStyleLeft)
     {
-        _pageControl.frame = CGRectMake(10, HIGHT+UISCREENHEIGHT +44, 20*_pageControl.numberOfPages, 20);
+        _pageControl.frame = CGRectMake(10, HIGHT+UISCREENHEIGHT , 20*_pageControl.numberOfPages, 20);
     }
     else if (PageControlShowStyle == UIPageControlShowStyleCenter)
     {
         _pageControl.frame = CGRectMake(0, 0, 20*_pageControl.numberOfPages, 20);
-        _pageControl.center = CGPointMake(UISCREENWIDTH/2.0, HIGHT+UISCREENHEIGHT +54);
+        _pageControl.center = CGPointMake(UISCREENWIDTH/2.0, HIGHT+UISCREENHEIGHT);
     }
     else
     {
-        _pageControl.frame = CGRectMake( UISCREENWIDTH - 20*_pageControl.numberOfPages, HIGHT+UISCREENHEIGHT +44, 20*_pageControl.numberOfPages, 20);
+        _pageControl.frame = CGRectMake( UISCREENWIDTH - 20*_pageControl.numberOfPages, HIGHT+UISCREENHEIGHT-20, 20*_pageControl.numberOfPages, 20);
     }
     _pageControl.currentPage = 0;
     
@@ -184,6 +187,9 @@ static NSUInteger currentImage = 1;//记录中间图片的下标,开始总是为
 #pragma mark - 图片停止时,调用该函数使得滚动视图复用
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
+       
+//    NSLog(@"~~~~~~~%ld",currentImage);
+    
     if (self.contentOffset.x == 0)
     {
         currentImage = (currentImage-1)%_imageNameArray.count;
@@ -200,11 +206,11 @@ static NSUInteger currentImage = 1;//记录中间图片的下标,开始总是为
         return;
     }
     
-    _leftAdLabel.text = _adTitleArray[(currentImage-1)%_imageNameArray.count];
-  
-    _centerAdLabel.text = _adTitleArray[currentImage%_imageNameArray.count];
-   
-    _rightAdLabel.text = _adTitleArray[(currentImage+1)%_imageNameArray.count];
+//    _leftAdLabel.text = _adTitleArray[(currentImage-1)%_imageNameArray.count];
+//  
+//    _centerAdLabel.text = _adTitleArray[currentImage%_imageNameArray.count];
+//   
+//    _rightAdLabel.text = _adTitleArray[(currentImage+1)%_imageNameArray.count];
     
     
     [_leftImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:Main_URL,_imageNameArray[(currentImage-1)%_imageNameArray.count][@"banner"]]]];
@@ -221,6 +227,9 @@ static NSUInteger currentImage = 1;//记录中间图片的下标,开始总是为
     }
     _isTimeUp = NO;
 }
+
+
+
 
 @end
 

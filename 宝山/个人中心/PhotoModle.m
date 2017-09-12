@@ -1,10 +1,11 @@
 //
 //  PhotoModle.m
-//  Ecological
+//  宝山
 //
-//  Created by 尤超 on 16/9/2.
-//  Copyright © 2016年 董立峥. All rights reserved.
+//  Created by 尤超 on 17/5/2.
+//  Copyright © 2017年 尤超. All rights reserved.
 //
+
 
 #import "PhotoModle.h"
 

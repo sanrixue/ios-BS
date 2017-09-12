@@ -1,10 +1,11 @@
 //
 //  MyPostModel.m
-//  WX
+//  宝山
 //
-//  Created by 尤超 on 2017/5/2.
+//  Created by 尤超 on 17/5/2.
 //  Copyright © 2017年 尤超. All rights reserved.
 //
+
 
 #import "MyPostModel.h"
 
@@ -12,11 +13,11 @@
 
 - (instancetype)initWithDict:(NSDictionary *)dic {
     if (self = [super init]) {
-        self.icon = [dic valueForKey:@"icon"];
+        self.icon = [dic valueForKey:@"logo"];
         self.title = [dic valueForKey:@"title"];
-        self.context = [dic valueForKey:@"context"];
-        self.time = [dic valueForKey:@"time"];
-        self.images = [dic valueForKey:@"images"];
+        self.context = [dic valueForKey:@"content"];
+        self.time = [dic valueForKey:@"create_time"];
+        self.images = [dic valueForKey:@"imgs"];
     }
     return self;
     

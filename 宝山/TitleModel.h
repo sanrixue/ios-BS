@@ -10,4 +10,8 @@
 
 @interface TitleModel : NSObject
 
+@property (nonatomic, strong) NSString *title;
+
++ (TitleModel *)shareModel;
+
 @end

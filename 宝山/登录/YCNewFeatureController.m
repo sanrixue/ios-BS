@@ -8,6 +8,7 @@
 
 #import "YCNewFeatureController.h"
 #import "LoginController.h"
+#import "MainNavigationController.h"
 
 #define YCNewFeatureCount 3
 
@@ -44,7 +45,7 @@
         CGFloat imageViewW = scrollW;
         CGFloat imageViewH = scrollH;
         imageView.frame = CGRectMake(imageViewX, imageViewY, imageViewW, imageViewH);
-        NSString *name = [NSString stringWithFormat:@"new_feature_%d", i + 1];
+        NSString *name = [NSString stringWithFormat:@"Y%d", i + 1];
         imageView.image = [UIImage imageNamed:name];
         [scrollView addSubview:imageView];
         // 如果是最后一个imageView，就往里面添加其他内容
@@ -76,7 +77,7 @@
     self.pageControl = pageController;
     // Do any additional setup after loading the view.
     
-    
+    self.pageControl.hidden = YES;
 }
 
 
@@ -104,8 +105,10 @@
 }
 
 - (void)startClick {
-    LoginController *VC = [[LoginController alloc] init];
-    [self presentViewController:VC animated:YES completion:nil];
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    
+    LoginController *loginContro = [[LoginController alloc] init];
+    [window setRootViewController:[[MainNavigationController alloc] initWithRootViewController:loginContro]];
 }
 
 - (void)dealloc {

@@ -35,7 +35,7 @@ alpha:1.0]
     
     
 }
--(void)setTagWithTagArray:(NSArray*)arr{
+-(void)setTagWithTagArray:(NSMutableArray*)arr{
     
     previousFrame = CGRectZero;
     [_tagArr addObjectsFromArray:arr];
@@ -62,7 +62,7 @@ alpha:1.0]
         }
         [tagBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [tagBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-        tagBtn.titleLabel.font=[UIFont boldSystemFontOfSize:15];
+        tagBtn.titleLabel.font=[UIFont boldSystemFontOfSize:14];
         [tagBtn addTarget:self action:@selector(tagBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [tagBtn setTitle:str forState:UIControlStateNormal];
         tagBtn.tag=KBtnTag+idx;
@@ -70,7 +70,7 @@ alpha:1.0]
 //        tagBtn.layer.borderColor=R_G_B_16(0x818181).CGColor;
 //        tagBtn.layer.borderWidth=0.3;
         tagBtn.clipsToBounds=YES;
-        NSDictionary *attrs = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:15]};
+        NSDictionary *attrs = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:14]};
         CGSize Size_str=[str sizeWithAttributes:attrs];
         Size_str.width += HORIZONTAL_PADDING*3;
         Size_str.height += VERTICAL_PADDING*3;
@@ -119,9 +119,9 @@ alpha:1.0]
     button.selected=!button.selected;
     if(button.selected==YES){
         
-        button.backgroundColor=COLOR(231, 196, 128, 1);
+        button.backgroundColor=COLOR(0, 124, 23, 1);
     }else if (button.selected==NO){
-        button.backgroundColor=COLOR(231, 196, 128, 1);
+        button.backgroundColor=[UIColor grayColor];
     }
     
     [self didSelectItems];

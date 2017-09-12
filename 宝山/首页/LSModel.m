@@ -11,4 +11,26 @@
 
 @implementation LSModel
 
+- (instancetype)initWithDict:(NSDictionary *)dic {
+    if (self = [super init]) {
+        self.icon = [dic valueForKey:@"logo"];
+        self.title = [dic valueForKey:@"title"];
+        self.start_time = [dic valueForKey:@"start_time"];
+        self.ID = [dic valueForKey:@"id"];
+       
+    }
+    return self;
+    
+}
+
++ (instancetype)lsWithDict:(NSDictionary *)dic {
+    return [[self alloc]initWithDict:dic];
+}
+
+
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key{
+    NSLog(@"%@",key);
+}
+
 @end
+

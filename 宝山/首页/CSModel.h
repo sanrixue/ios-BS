@@ -10,4 +10,12 @@
 
 @interface CSModel : NSObject
 
+@property (nonatomic, copy) NSString *icon;       //图片
+@property (nonatomic, copy) NSString *title;      //标题
+@property (nonatomic, copy) NSString *ID;
+
+- (instancetype)initWithDict:(NSDictionary *)dic;
+
++ (instancetype)csWithDict:(NSDictionary *)dic;
+
 @end

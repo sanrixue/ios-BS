@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ZTLayout : UICollectionViewLayout
+@interface ZTLayout : UICollectionViewFlowLayout
 
 @end

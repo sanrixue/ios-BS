@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class TicketModel;
+
+static NSString *ticketIndentifier = @"ticketCell";
+
 @interface TicketCell : UITableViewCell
+
+@property (nonatomic, strong) TicketModel *ticketModel;
+
+@property (nonatomic, strong) UIImageView *icon;
+@property (nonatomic, strong) UILabel *title;
+@property (nonatomic, strong) UILabel *time;
+@property (nonatomic, strong) UILabel *content;
 
 @end

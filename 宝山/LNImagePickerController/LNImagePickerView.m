@@ -14,7 +14,7 @@
 #import "LNPhotoBrowserController.h"
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
-#define IMAGE_WIDTH ceil((SCREEN_WIDTH - 50) / 4)
+#define IMAGE_WIDTH ceil((SCREEN_WIDTH - 60) / 5)
 
 @interface LNImagePickerView ()
 {
@@ -29,7 +29,7 @@
     self = [super initWithFrame:CGRectMake(0, pointY, SCREEN_WIDTH, IMAGE_WIDTH + 20)];
     if (self) {
         self.layer.borderColor = [[UIColor clearColor] CGColor];
-        self.imageView.frame = CGRectMake(10, 10, IMAGE_WIDTH, IMAGE_WIDTH);
+        self.imageView.frame = CGRectMake(20, 10, IMAGE_WIDTH, IMAGE_WIDTH);
         parentViewContrller = target;
         [self addSubview:self.imageView];
         [self setDefault];
@@ -73,7 +73,7 @@
                     }
                     LNPhotoAsset *photoAsset = self.photoAssets[i];
                     UIImageView *myImageView = [[UIImageView alloc] initWithImage:photoAsset.thumbImage];
-                    myImageView.frame = CGRectMake(10 + i % 4 *(10 + IMAGE_WIDTH), 10 + i / 4 * (IMAGE_WIDTH + 10), IMAGE_WIDTH, IMAGE_WIDTH);
+                    myImageView.frame = CGRectMake(10 + i % 5 *(10 + IMAGE_WIDTH), 10 + i / 5 * (IMAGE_WIDTH + 10), IMAGE_WIDTH, IMAGE_WIDTH);
                     myImageView.tag = i;
                     myImageView.tap = [LNTouchTap tapWithTapBlock:^(UIImageView *sender)
                                        {
@@ -90,7 +90,7 @@
            
             LNPhotoAsset *photoAsset = self.photoAssets[i];
             UIImageView *myImageView = [[UIImageView alloc] initWithImage:photoAsset.thumbImage];
-            myImageView.frame = CGRectMake(10 + i % 4 *(10 + IMAGE_WIDTH), 10 + i / 4 * (IMAGE_WIDTH + 10), IMAGE_WIDTH, IMAGE_WIDTH);
+            myImageView.frame = CGRectMake(10 + i % 5 *(10 + IMAGE_WIDTH), 10 + i / 5 * (IMAGE_WIDTH + 10), IMAGE_WIDTH, IMAGE_WIDTH);
             myImageView.tag = i;
             myImageView.tap = [LNTouchTap tapWithTapBlock:^(UIImageView *sender)
             {
@@ -105,12 +105,12 @@
         
         if (count < self.maxSelectCount)
         {
-            self.imageView.frame = CGRectMake(10 + count % 4 *(10 + IMAGE_WIDTH), 10 + count / 4 * (IMAGE_WIDTH + 10), IMAGE_WIDTH, IMAGE_WIDTH);
+            self.imageView.frame = CGRectMake(10 + count % 5 *(10 + IMAGE_WIDTH), 10 + count / 5 * (IMAGE_WIDTH + 10), IMAGE_WIDTH, IMAGE_WIDTH);
         }else
         {
             [self.imageView setHidden:YES];
         }
-        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, SCREEN_WIDTH, (count / 4 + 1) * IMAGE_WIDTH + (count / 4 + 2) * 10);
+        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, SCREEN_WIDTH, (count / 5 + 1) * IMAGE_WIDTH + (count / 5 + 2) * 10);
     }
 }
 

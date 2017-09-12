@@ -1,9 +1,9 @@
 //
 //  DBManager.m
-//  BaMaiYL
+//  宝山
 //
-//  Created by Super on 16/5/6.
-//  Copyright © 2016年 季晓侠. All rights reserved.
+//  Created by 尤超 on 17/4/20.
+//  Copyright © 2017年 尤超. All rights reserved.
 //
 
 #import "DBManager.h"
@@ -41,7 +41,6 @@
             //创建表 不存在 则创建
             [self creatTable];
             
-            
         }else {
             NSLog(@"database open failed:%@",_database.lastErrorMessage);
         }
@@ -52,7 +51,7 @@
 #pragma mark - 创建表
 - (void)creatTable {
     
-    NSString *sql = @"create table if not exists model(user_id integer primary key AUTOINCREMENT,user_name text,user_logo text,user_phone text,user_pwd text,user_type text)";
+    NSString *sql = @"create table if not exists model(user_id integer primary key AUTOINCREMENT,user_loginName text,user_phone text,user_logo text,user_name text,user_sex text,user_type text,user_QRcode text)";
     
     //创建表 如果不存在则创建新的表
     BOOL isSuccees = [_database executeUpdate:sql];
@@ -81,12 +80,12 @@
 }
 
 - (void)insertUserModel:(UserModel *)userModel {
-    NSString *sql = @"insert into model(user_id,user_name,user_logo,user_phone,user_pwd,user_type) values (?,?,?,?,?,?)";
+    NSString *sql = @"insert into model(user_id,user_loginName,user_phone,user_logo,user_name,user_sex,user_type,user_QRcode) values (?,?,?,?,?,?,?,?)";
     if ([self userisExistModelId:userModel.user_id]) {
         NSLog(@"数据已经存在");
         return;
     }
-    BOOL isSuccess= [_database executeUpdate:sql,userModel.user_id,userModel.user_name,userModel.user_logo,userModel.user_phone,userModel.user_pwd,userModel.user_type];
+    BOOL isSuccess= [_database executeUpdate:sql,userModel.user_id,userModel.user_loginName,userModel.user_phone,userModel.user_logo,userModel.user_name,userModel.user_sex,userModel.user_type,userModel.user_QRcode];
     if (isSuccess) {
         NSLog(@"数据库收藏成功");
     }
@@ -119,8 +118,8 @@
 
 
 ////修改
-- (void)upadteUserModelModelName:(NSString *)modelName ModelPassword:(NSString *)modelPassword FromModelId:(NSString *)modelId {
-    NSString *sql = @"update model set user_name = ?,user_pwd = ? where user_id = ?";
+- (void)upadteUserModelModelName:(NSString *)modelName ModelModelSex:(NSString *)modelSex FromModelId:(NSString *)modelId {
+    NSString *sql = @"update model set user_name = ?,user_sex = ?where user_id = ?";
     BOOL isSuccess= [_database executeUpdate:sql,modelName,modelId];
     if (!isSuccess) {
         NSLog(@"修改失败: %@",_database.lastErrorMessage);
@@ -138,18 +137,19 @@
     NSMutableArray *ary=[[NSMutableArray alloc]init];
     while ([rs next]) {
         
+      
         UserModel *model=[[UserModel alloc]init];
         model.user_id = [rs stringForColumn:@"user_id"];
         model.user_name = [rs stringForColumn:@"user_name"];
         model.user_logo = [rs stringForColumn:@"user_logo"];
         model.user_phone = [rs stringForColumn:@"user_phone"];
-        model.user_pwd = [rs stringForColumn:@"user_pwd"];
         model.user_type = [rs stringForColumn:@"user_type"];
+        model.user_sex = [rs stringForColumn:@"user_sex"];
+        model.user_QRcode = [rs stringForColumn:@"user_QRcode"];
         [ary addObject:model];
 
         
     }
-    
     return ary;
 }
 
@@ -166,8 +166,9 @@
         model.user_name = [rs stringForColumn:@"user_name"];
         model.user_logo = [rs stringForColumn:@"user_logo"];
         model.user_phone = [rs stringForColumn:@"user_phone"];
-        model.user_pwd = [rs stringForColumn:@"user_pwd"];
         model.user_type = [rs stringForColumn:@"user_type"];
+        model.user_sex = [rs stringForColumn:@"user_sex"];
+        model.user_QRcode = [rs stringForColumn:@"user_QRcode"];
         [ary addObject:model];
         
     }

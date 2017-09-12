@@ -10,4 +10,14 @@
 
 @interface LSModel : NSObject
 
+@property (nonatomic, copy) NSString *icon;       //图片
+@property (nonatomic, copy) NSString *title;      //标题
+@property (nonatomic, copy) NSString *start_time; //开始时间
+@property (nonatomic, copy) NSString *ID;        
+
+
+- (instancetype)initWithDict:(NSDictionary *)dic;
+
++ (instancetype)lsWithDict:(NSDictionary *)dic;
+
 @end

@@ -10,4 +10,8 @@
 
 @interface TypeModel : NSObject
 
+@property (nonatomic, strong) NSString *type;
+
++ (TypeModel *)shareModel;
+
 @end

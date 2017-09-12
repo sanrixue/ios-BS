@@ -10,4 +10,25 @@
 
 @implementation MessageModel
 
+- (instancetype)initWithDict:(NSDictionary *)dic {
+    if (self = [super init]) {
+        self.ID = [dic valueForKey:@"id"];
+        self.title = [dic valueForKey:@"title"];
+        self.context = [dic valueForKey:@"content"];
+        self.time = [dic valueForKey:@"create_time"];
+        
+    }
+    return self;
+    
+}
+
++ (instancetype)messageWithDict:(NSDictionary *)dic {
+    return [[self alloc]initWithDict:dic];
+}
+
+
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key{
+    NSLog(@"%@",key);
+}
+
 @end

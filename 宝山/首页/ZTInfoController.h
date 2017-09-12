@@ -10,4 +10,6 @@
 
 @interface ZTInfoController : UIViewController
 
+@property (nonatomic, strong) NSString *ID;
+
 @end

@@ -10,4 +10,6 @@
 
 @interface TicketInfoController : UIViewController
 
+@property (nonatomic, strong) NSString *ID;
+
 @end

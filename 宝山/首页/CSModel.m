@@ -10,4 +10,24 @@
 
 @implementation CSModel
 
+- (instancetype)initWithDict:(NSDictionary *)dic {
+    if (self = [super init]) {
+        self.icon = [dic valueForKey:@"logo"];
+        self.title = [dic valueForKey:@"title"];
+        self.ID = [dic valueForKey:@"id"];
+        
+    }
+    return self;
+    
+}
+
++ (instancetype)csWithDict:(NSDictionary *)dic {
+    return [[self alloc]initWithDict:dic];
+}
+
+
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key{
+    NSLog(@"%@",key);
+}
+
 @end

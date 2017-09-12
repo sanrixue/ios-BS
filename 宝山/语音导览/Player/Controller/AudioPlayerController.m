@@ -10,7 +10,7 @@
 #import "AudioPlayerController+methods.h"
 #import "NSString+time.h"
 
-@interface AudioPlayerController (){
+@interface AudioPlayerController ()<UIWebViewDelegate>{
     AVPlayerItem *playerItem;
     id _playTimeObserver; // 播放进度观察者
     NSArray *_modelArray; // 歌曲数组
@@ -22,6 +22,11 @@
 
     MusicModel *_playingModel; // 正在播放的model
     CGFloat _totalTime; // 总时间
+    
+    
+    UILabel *_title;
+    
+   
 }
 @property (weak, nonatomic) IBOutlet UISlider *paceSlider; // 进度条
 @property (weak, nonatomic) IBOutlet UIButton *playButton; // 播放按钮
@@ -29,6 +34,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *maxTime; // 总时间Label
 
 @property (nonatomic, strong) AVPlayer *player;
+
+@property (nonatomic, strong) UIWebView *webView;
+
+@property (nonatomic, strong) NSString *ID;
+
 @end
 
 static AudioPlayerController *audioVC;
@@ -48,10 +58,105 @@ static AudioPlayerController *audioVC;
     return audioVC;
 }
 
+- (void)rightItemClick {
+    DBManager *model = [[DBManager sharedManager] selectOneModel];
+    NSMutableArray *mutArray = [NSMutableArray array];
+    [mutArray addObject:model];
+    UserModel *userModel = mutArray[0];
+    
+    
+    NSString *url = [NSString stringWithFormat:Main_URL,AddCollection_URL];
+    
+    NSLog(@"%@",url);
+    
+    NSDictionary *dic = @{@"fkId":self.ID,
+                          @"type":@"5",
+                          @"uid":userModel.user_id};
+    
+    NSLog(@"%@",dic);
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    [manager POST:url parameters:dic progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        
+        [self showMessegeForResult:responseObject[@"msg"]];
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+    
+}
+#pragma mark - 输入提示错误提示
+- (void)showMessegeForResult:(NSString *)messege
+{
+    if([[[UIDevice currentDevice] systemVersion] floatValue]>7.0)
+    {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:messege preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:alert animated:YES completion:^
+         {
+             [self performSelector:@selector(dismissAlertViewEvent:) withObject:alert afterDelay:1];
+         }];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:messege delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+- (void)dismissAlertViewEvent:(id)alert
+{
+    if([alert isKindOfClass:[UIAlertController class]])
+    {
+        [alert dismissViewControllerAnimated:YES completion:^
+         {
+         }];
+    }
+    else
+    {
+        [alert dismissWithClickedButtonIndex:[alert cancelButtonIndex] animated:YES];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.title = @"语音导览详情";
+    
+    
+    UIView *rightButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    UIButton *mainAndSearchBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    [rightButtonView addSubview:mainAndSearchBtn];
+    [mainAndSearchBtn setImage:[UIImage imageNamed:@"xin1"] forState:UIControlStateNormal];
+    [mainAndSearchBtn addTarget:self action:@selector(rightItemClick) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightCunstomButtonView = [[UIBarButtonItem alloc] initWithCustomView:rightButtonView];
+    self.navigationItem.rightBarButtonItem = rightCunstomButtonView;
+    
+    
+    self.ID = [NSString string];
+    
+    
     [self.paceSlider setThumbImage:[UIImage imageNamed:@"Slider_控制点"] forState:UIControlStateNormal];
     [self creatViews];
+    
+    _title = [[UILabel alloc] initWithFrame:CGRectMake(0, 275*KSCREENHEIGHT/667, KSCREENWIDTH, 30)];
+    _title.textColor = [UIColor whiteColor];
+    _title.textAlignment = NSTextAlignmentCenter;
+    _title.font = [UIFont systemFontOfSize:16];
+    [self.view addSubview:_title];
+    
+   
+    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(20, 310*KSCREENHEIGHT/667, KSCREENWIDTH-40, 200*KSCREENHEIGHT/667)];
+    self.webView.dataDetectorTypes = UIDataDetectorTypeAll;
+    [self.view addSubview:self.webView];
+    self.webView.scrollView.bounces = NO;
 }
 
 - (void)viewWillLayoutSubviews{
@@ -74,6 +179,7 @@ static AudioPlayerController *audioVC;
         isRemoveNot = NO;
     }
     MusicModel *model;
+    
     // 判断是不是随机播放
     if (_playerMode == AudioPlayerModeRandomPlay) {
         // 如果是随机播放，判断随机数组是否有值
@@ -94,13 +200,9 @@ static AudioPlayerController *audioVC;
     // 更新界面歌曲信息：歌名，歌手，图片
     [self updateUIDataWith:model];
     
+
     
-    NSLog(@"~~~~~~~~~~~%@",model.voice_path);
-    
-    
-//    playerItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:model.voice_path]];
-    
-    playerItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://123.206.206.45:8082/baoShan/%@",model.voice_path]]];
+    playerItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:[NSString stringWithFormat:Main_URL,model.voice_path]]];
     
     
     [self.player replaceCurrentItemWithPlayerItem:playerItem];
@@ -118,8 +220,33 @@ static AudioPlayerController *audioVC;
     [self.rotatingView removeAnimation];
 }
 
+
 - (void)updateUIDataWith:(MusicModel *)model{
-  
+    
+    self.ID = model.mid;
+    NSLog(@"~~~~~~~~~%@",self.ID);
+
+    
+    NSString *url = [NSString stringWithFormat:Main_URL,[NSString stringWithFormat:Addread_URL,self.ID]];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    [manager POST:url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSLog(@"!!!!!!!!!!!!!!!!%@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+
+    
+    
+    _title.text = [NSString stringWithFormat:@"%@-%@",model.etitle,model.title];
+    
+    [self.webView loadHTMLString:model.content baseURL:nil];
+    
     [self setImageWith:model];
 }
 

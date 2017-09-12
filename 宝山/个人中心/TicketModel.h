@@ -10,4 +10,13 @@
 
 @interface TicketModel : NSObject
 
+@property (nonatomic, copy) NSString *icon;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *time;
+@property (nonatomic, copy) NSString *content;
+
+- (instancetype)initWithDict:(NSDictionary *)dic;
+
++ (instancetype)ticketWithDict:(NSDictionary *)dic;
+
 @end

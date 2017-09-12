@@ -10,4 +10,11 @@
 
 @interface HomeModel : NSObject
 
+@property (nonatomic, strong) NSString *image;
+@property (nonatomic, strong) NSString *name;
+
+- (instancetype)initWithDict:(NSDictionary *)dic;
+
++ (instancetype)homeWithDict:(NSDictionary *)dic;
+
 @end

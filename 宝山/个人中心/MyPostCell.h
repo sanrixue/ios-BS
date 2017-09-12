@@ -25,9 +25,7 @@ static NSString *postIndentifier = @"postCell";
 @property (nonatomic, strong) UILabel *context;
 @property (nonatomic, strong) UILabel *time;
 @property (nonatomic,strong) NSMutableArray * imageArray;
-
+@property (nonatomic,strong) NSArray * array;
 @property (nonatomic,assign) id<cellDelegate> delegate;
-
-@property (nonatomic, assign) NSInteger high;
 
 @end

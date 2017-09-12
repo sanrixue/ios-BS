@@ -1,14 +1,14 @@
 //
 //  ForgetPasswordController.h
-//  宝山城市规划馆
+//  宝山
 //
-//  Created by YC on 16/11/15.
-//
+//  Created by 尤超 on 17/4/12.
+//  Copyright © 2017年 尤超. All rights reserved.
 //
 
 #import "ForgetPasswordController.h"
 #import "YCHead.h"
-
+#import "TitleModel.h"
 
 @interface ForgetPasswordController ()<UIAlertViewDelegate>{
     UITextField *_phone;
@@ -28,7 +28,17 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.navigationItem.title = @"忘记密码";
+    TitleModel *model = [TitleModel shareModel];
+    
+    if ([model.title isEqualToString:@"1"]) {
+       self.navigationItem.title = @"忘记密码";
+    } else if ([model.title isEqualToString:@"2"]) {
+        
+       self.navigationItem.title = @"修改密码";
+    }
+
+    
+
     
     [self setUpUI];
 }
@@ -46,7 +56,7 @@
   
     
     _test = [[UITextField alloc] init];
-    [creatControls text:_test Title:@"输入验证码" Frame:CGRectMake(KSCREENWIDTH * 0.1,  KSCREENHEIGHT* 0.2 + 50, KSCREENWIDTH * 0.8, 40) Image:[UIImage imageNamed:@"yzm"]];
+    [creatControls text:_test Title:@"输入短信验证码" Frame:CGRectMake(KSCREENWIDTH * 0.1,  KSCREENHEIGHT* 0.2 + 50, KSCREENWIDTH * 0.8, 40) Image:[UIImage imageNamed:@"yzm"]];
     [self.view addSubview:_test];
     _test.textColor = COLOR(186, 190, 209, 1.0);
     [_test setValue:COLOR(186, 190, 209, 1.0) forKeyPath:@"_placeholderLabel.textColor"];
@@ -54,7 +64,7 @@
     
     
     _password = [[UITextField alloc] init];
-    [creatControls text:_password Title:@"输入新密码" Frame:CGRectMake(KSCREENWIDTH * 0.1,  KSCREENHEIGHT* 0.2 + 100, KSCREENWIDTH * 0.8, 40) Image:[UIImage imageNamed:@"pwd"]];
+    [creatControls text:_password Title:@"设置密码(至少6位)" Frame:CGRectMake(KSCREENWIDTH * 0.1,  KSCREENHEIGHT* 0.2 + 100, KSCREENWIDTH * 0.8, 40) Image:[UIImage imageNamed:@"pwd"]];
     [self.view addSubview:_password];
     _password.textColor = COLOR(186, 190, 209, 1.0);
     [_password setValue:COLOR(186, 190, 209, 1.0) forKeyPath:@"_placeholderLabel.textColor"];
@@ -68,17 +78,17 @@
     [PUTBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [PUTBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
     [PUTBtn addTarget:self action:@selector(PUTBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    PUTBtn.backgroundColor = COLOR(231, 196, 128, 1);
+    PUTBtn.backgroundColor = COLOR(0, 123, 23, 0.8);
     PUTBtn.layer.cornerRadius = 5;
     [self.view addSubview:PUTBtn];
     
     
     
     UIButton *testBtn = [[UIButton alloc] init];
-    testBtn.frame = CGRectMake(KSCREENWIDTH * 0.85-100,  KSCREENHEIGHT* 0.2 + 50, 100, 35);
+    testBtn.frame = CGRectMake(KSCREENWIDTH * 0.85-90,  KSCREENHEIGHT* 0.2 + 50, 100, 35);
     [testBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
     testBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [testBtn setTitleColor:COLOR(231, 196, 128, 1) forState:UIControlStateNormal];
+    [testBtn setTitleColor:COLOR(0, 123, 23, 0.8) forState:UIControlStateNormal];
     [testBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     [testBtn addTarget:self action:@selector(testBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     testBtn.backgroundColor = [UIColor clearColor];
@@ -116,51 +126,51 @@
         
         NSLog(@"验证码%@",url);
         
-//        [AFNetwork POST:url parameters:nil success:^(id  _Nonnull json) {
-//            NSLog(@"请求成功----->>>>%@",json);
-//            
-//            [self showMessegeForResult:json[@"msg"]];
-//            __block int timeout=60;//倒计时时间
-//            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-//            dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
-//            dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
-//            dispatch_source_set_event_handler(_timer, ^
-//                                              {
-//                                                  if(timeout<=0)
-//                                                  { //倒计时结束，关闭
-//                                                      dispatch_source_cancel(_timer);
-//                                                      dispatch_async(dispatch_get_main_queue(), ^
-//                                                                     {
-//                                                                         //设置界面的按钮显示 根据自己需求设置
-//                                                                         [sender setTitle:@"重新发送" forState:UIControlStateNormal];
-//                                                                         sender.userInteractionEnabled = YES;
-//                                                                         [sender setBackgroundColor:COLOR(143, 212, 226, 1)];
-//                                                                     });
-//                                                  }
-//                                                  else
-//                                                  {
-//                                                      int seconds = timeout % 130;
-//                                                      NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
-//                                                      dispatch_async(dispatch_get_main_queue(), ^
-//                                                                     {
-//                                                                         //设置界面的按钮显示 根据自己需求设置
-//                                                                         //NSLog(@"____%@",strTime);
-//                                                                         [UIView beginAnimations:nil context:nil];
-//                                                                         [UIView setAnimationDuration:0.5];
-//                                                                         [sender setTitle:[NSString stringWithFormat:@"%@秒重新发送",strTime] forState:UIControlStateNormal];
-//                                                                         [sender setBackgroundColor:COLOR(143, 212, 226, 1)];
-//                                                                         [UIView commitAnimations];
-//                                                                         sender.userInteractionEnabled = NO;
-//                                                                     });
-//                                                      timeout--;
-//                                                  }
-//                                                  
-//                                              });
-//            dispatch_resume(_timer);
-//            
-//        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//            NSLog(@"请求失败------>>>%@",error);
-//        }];
+        [AFNetwork POST:url parameters:nil success:^(id  _Nonnull json) {
+            NSLog(@"请求成功----->>>>%@",json);
+            
+            [self showMessegeForResult:json[@"msg"]];
+            __block int timeout=60;//倒计时时间
+            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+            dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
+            dispatch_source_set_event_handler(_timer, ^
+                                              {
+                                                  if(timeout<=0)
+                                                  { //倒计时结束，关闭
+                                                      dispatch_source_cancel(_timer);
+                                                      dispatch_async(dispatch_get_main_queue(), ^
+                                                                     {
+                                                                         //设置界面的按钮显示 根据自己需求设置
+                                                                         [sender setTitle:@"重新发送" forState:UIControlStateNormal];
+                                                                         sender.userInteractionEnabled = YES;
+                                                                         [sender setBackgroundColor:[UIColor clearColor]];
+                                                                     });
+                                                  }
+                                                  else
+                                                  {
+                                                      int seconds = timeout % 130;
+                                                      NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
+                                                      dispatch_async(dispatch_get_main_queue(), ^
+                                                                     {
+                                                                         //设置界面的按钮显示 根据自己需求设置
+                                                                         //NSLog(@"____%@",strTime);
+                                                                         [UIView beginAnimations:nil context:nil];
+                                                                         [UIView setAnimationDuration:0.5];
+                                                                         [sender setTitle:[NSString stringWithFormat:@"%@秒重新发送",strTime] forState:UIControlStateNormal];
+                                                                         [sender setBackgroundColor:[UIColor clearColor]];
+                                                                         [UIView commitAnimations];
+                                                                         sender.userInteractionEnabled = NO;
+                                                                     });
+                                                      timeout--;
+                                                  }
+                                                  
+                                              });
+            dispatch_resume(_timer);
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"请求失败------>>>%@",error);
+        }];
         
     } else {
         
@@ -191,32 +201,32 @@
             }
             else
             {
-//                    NSDictionary * PostDic = @{@"phone":_phone.text,@"yzm":_test.text,@"login_pwd":_password.text};
-//                    
-//                    NSString * url = [NSString stringWithFormat:Main_URL,Forget_URL];
-//                
-//                NSLog(@"修改密码%@",url);
-//                
-//                    [AFNetwork POST:url parameters:PostDic success:^(id  _Nonnull json) {
-//                        NSLog(@"请求成功---->>>%@",json);
-//                        if ([json[@"code"] isEqualToString:@"200"])
-//                        {
-//                            
-//                            
-//                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"修改成功" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-//                            [alert show];
-//                            
-//                            
-//                        }
-//                        else
-//                        {
-//                            [self showMessegeForResult:json[@"msg"]];
-//                        }
-//                        
-//                    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//                        NSLog(@"请求失败---->>>%@",error);
-//                    }];
-//                    
+                    NSDictionary * PostDic = @{@"loginName":_phone.text,@"yzm":_test.text,@"loginPwd":_password.text};
+                    
+                    NSString * url = [NSString stringWithFormat:Main_URL,Forget_URL];
+                
+                NSLog(@"修改密码%@",url);
+                
+                    [AFNetwork POST:url parameters:PostDic success:^(id  _Nonnull json) {
+                        NSLog(@"请求成功---->>>%@",json);
+                        if ([json[@"code"] isEqualToString:@"200"])
+                        {
+                            
+                            
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"修改成功" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                            [alert show];
+                            
+                            
+                        }
+                        else
+                        {
+                            [self showMessegeForResult:json[@"msg"]];
+                        }
+                        
+                    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                        NSLog(@"请求失败---->>>%@",error);
+                    }];
+                    
                 
                 }
             }
