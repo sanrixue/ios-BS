@@ -126,7 +126,7 @@
         [btn setTitle:@"展馆简介" forState:UIControlStateNormal];
         btn.titleLabel.font = [UIFont systemFontOfSize:15];
         [btn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        [btn setImage:[UIImage imageNamed:@"未标题-5-1"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"首页 1-2"] forState:UIControlStateNormal];
         [btn layoutButtonWithEdgeInsetsStyle:MKButtonEdgeInsetsStyleTop imageTitleSpace:7];
         [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btn];
@@ -136,7 +136,7 @@
         [btn2 setTitle:@"常设展厅" forState:UIControlStateNormal];
         btn2.titleLabel.font = [UIFont systemFontOfSize:15];
         [btn2 setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        [btn2 setImage:[UIImage imageNamed:@"未标题-5-2"] forState:UIControlStateNormal];
+        [btn2 setImage:[UIImage imageNamed:@"首页 1-3"] forState:UIControlStateNormal];
         [btn2 layoutButtonWithEdgeInsetsStyle:MKButtonEdgeInsetsStyleTop imageTitleSpace:7];
         [btn2 addTarget:self action:@selector(btn2Click) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btn2];
@@ -146,7 +146,7 @@
         [btn3 setTitle:@"临时展厅" forState:UIControlStateNormal];
         btn3.titleLabel.font = [UIFont systemFontOfSize:15];
         [btn3 setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        [btn3 setImage:[UIImage imageNamed:@"未标题-5-3"] forState:UIControlStateNormal];
+        [btn3 setImage:[UIImage imageNamed:@"首页 1-4"] forState:UIControlStateNormal];
         [btn3 layoutButtonWithEdgeInsetsStyle:MKButtonEdgeInsetsStyleTop imageTitleSpace:7];
         [btn3 addTarget:self action:@selector(btn3Click) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btn3];
@@ -156,7 +156,7 @@
         [btn4 setTitle:@"交通路线" forState:UIControlStateNormal];
         btn4.titleLabel.font = [UIFont systemFontOfSize:15];
         [btn4 setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        [btn4 setImage:[UIImage imageNamed:@"未标题-5-4"] forState:UIControlStateNormal];
+        [btn4 setImage:[UIImage imageNamed:@"首页 1-5"] forState:UIControlStateNormal];
         [btn4 layoutButtonWithEdgeInsetsStyle:MKButtonEdgeInsetsStyleTop imageTitleSpace:7];
 
         
