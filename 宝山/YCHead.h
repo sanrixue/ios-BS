@@ -104,10 +104,11 @@
 
 #define backBarButton [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil]
 
+// 自适应设备宽度
+#define adaptWidth(w) (KSCREENWIDTH / 375 * (w))
 
-
-
-
+// 自适应设备高度
+#define adaptHeight(h) (KSCREENHEIGHT / 667 * (h))
 
 /****************************请求地址*******************************/
 

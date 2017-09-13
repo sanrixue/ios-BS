@@ -255,18 +255,18 @@
         [self.view addSubview:acticityView];
 
         [acticityView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(187, 142));
+            make.size.mas_equalTo(CGSizeMake(adaptWidth(187), adaptHeight(142)));
             if (i==0 || i==1) {
-                make.top.mas_equalTo(self.view).offset(325);
+                make.top.mas_equalTo(self.view).offset(adaptHeight(325));
             }
             else
             {
-                make.top.mas_equalTo(self.view).offset(467);
+                make.top.mas_equalTo(self.view).offset(adaptHeight(467));
                  [acticityView setBackgroundColor:[UIColor whiteColor]];
             }
             
             if (i==1 || i==3) {
-                make.left.mas_equalTo(self.view).offset(187);
+                make.left.mas_equalTo(self.view).offset(adaptWidth(187));
             }
             else
             {
@@ -311,10 +311,12 @@
         [acticityView addSubview:activityLabel];
         
         [activity mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(187,114));
+     
+            make.size.mas_equalTo(CGSizeMake(adaptWidth(187), adaptHeight(114)));
+
             make.top.mas_equalTo(acticityView);
             if (i==1 || i==3) {
-                make.left.mas_equalTo(self.view).offset(187);
+                make.left.mas_equalTo(self.view).offset(adaptWidth(187));
             }
             else
             {
@@ -324,9 +326,9 @@
         }];
         [activityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(activity.mas_bottom);
-            make.size.mas_equalTo(CGSizeMake(187, 28));
+            make.size.mas_equalTo(CGSizeMake(adaptWidth(187), adaptHeight(28)));
             if (i==1 || i==3) {
-                make.left.mas_equalTo(self.view).offset(187);
+                make.left.mas_equalTo(self.view).offset(adaptWidth(187));
             }
             else
             {
